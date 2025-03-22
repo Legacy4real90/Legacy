@@ -4,8 +4,8 @@ workflows:
     instance_type: linux  # Linux VPS ke liye
     environment:
       vars:
-        BOT_TOKEN: "YOUR_BOT_TOKEN"  # Telegram bot token
-        ALLOWED_USER_ID: "YOUR_TELEGRAM_USER_ID"  # Tera Telegram ID
+        BOT_TOKEN: "7789286725:AAHncH6RSYj5w8uSfNOdzsgHfy7ymiC6-hE"  # Telegram bot token
+        ALLOWED_USER_ID: "8003600588"  # Tera Telegram ID
       python: "3.9"  # Python version jo VPS pe hai
     scripts:
       - name: Install Dependencies
