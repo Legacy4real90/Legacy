@@ -1,25 +1,32 @@
 workflows:
   vps-bot-workflow:
     name: VPS Bot Workflow
-    instance_type: linux  # Linux VPS ke liye
+    instance_type: linux
     environment:
       vars:
-        BOT_TOKEN: "7789286725:AAHncH6RSYj5w8uSfNOdzsgHfy7ymiC6-hE"  # Telegram bot token
-        ALLOWED_USER_ID: "8003600588"  # Tera Telegram ID
-      python: "3.9"  # Python version jo VPS pe hai
+        BOT_TOKEN: "7789286725:AAHncH6RSYj5w8uSfNOdzsgHfy7ymiC6-hE"
+        ALLOWED_USER_ID: "8003600588"
     scripts:
+      - name: Install Python 3.9
+        script: |
+          # Check if Python 3.9 is installed, if not, install it
+          if ! command -v python3.9 &> /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y python3.9 python3.9-dev python3-pip
+          fi
+          python3.9 --version
       - name: Install Dependencies
         script: |
-          pip3 install pyTelegramBotAPI requests
+          python3.9 -m pip install pyTelegramBotAPI requests
       - name: Run VPS Bot Script
         script: |
-          python3 vps.py  # Teri file ka naam yaha daal diya
+          python3.9 vps.py
     triggering:
       events:
-        - push  # Git push pe trigger hoga
+        - push
       branch_patterns:
-        - pattern: "main"  # Jis branch pe chalana hai
+        - pattern: "main"
           include: true
     artifacts:
-      - "*.txt"  # Output files jo generate hongi
-      - "vps.py"  # Teri script file
+      - "*.txt"
+      - "vps.py"
